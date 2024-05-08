@@ -20,7 +20,7 @@ const CodeBlock = ({ id }: CodeBlockProps) => {
   (function() {
     const id = ${id}; 
     const scriptElement = document.createElement('script');
-    scriptElement.src = 'http://localhost:5173/src/main.ts';
+    scriptElement.src = 'https://noti-widget.vercel.app/assets/index.js';
     scriptElement.setAttribute('websiteId', id);
     scriptElement.type = 'module';
     document.body.appendChild(scriptElement);
