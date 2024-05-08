@@ -4,7 +4,6 @@ import Script from "next/script";
 const NotifyScript = () => {
   // scriptElement.src = 'https://noti-widget.vercel.app/assets/index.js'
   // scriptElement.src = 'http://localhost:5173/src/main.ts';
-  // scriptElement.src = 'https://r92g.github.io/NotiWidget/assets/index.js'
 
   return (
     <Script id="Notify">
