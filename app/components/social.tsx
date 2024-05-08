@@ -5,7 +5,6 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 
 import { Button } from "./ui/button";
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
 export const Social = () => {
   const onClick = async (provider: "google" | "github") => {
