@@ -193,7 +193,7 @@ export function LoginModal() {
       <hr className="my-4" />
       <Social />
       <div className="mt-4 text-center text-sm">
-        Don't have an account yet?{" "}
+        Don&apos;t have an account yet?{" "}
         <p
           onClick={toggleBetweenLoginAndRegister}
           className="underline block sm:inline cursor-pointer"
