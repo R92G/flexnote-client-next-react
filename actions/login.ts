@@ -1,7 +1,6 @@
 "use server";
 
 import * as z from "zod";
-import { AuthError } from "next-auth";
 
 import { db } from "@/lib/db";
 import { signIn } from "@/auth";
@@ -92,8 +91,8 @@ export const login = async (
     });
 
     return { error: "", success: "Logged in successfully!", twoFactor: false };
-  } catch (error) {
-    if (error instanceof AuthError) {
+  } catch (error: any) {
+    if (error.type) {
       switch (error.type) {
         case "CredentialsSignin":
           return {
