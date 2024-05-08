@@ -23,6 +23,10 @@ export const Footer = () => {
       href: "/#faq",
       label: "FAQ",
     },
+    {
+      href: "/info",
+      label: "Info",
+    },
   ];
   return (
     <footer id="footer">
