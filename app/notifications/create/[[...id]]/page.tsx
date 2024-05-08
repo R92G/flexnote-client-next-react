@@ -53,7 +53,7 @@ import {
 } from "@/actions/notifications/notificationActions";
 import { Switch } from "@/app/components/ui/switch";
 
-const page = () => {
+const Page = () => {
   const pathname = usePathname();
   const router = useRouter();
   const currentUser = useCurrentUser();
@@ -475,4 +475,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
