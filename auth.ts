@@ -8,7 +8,7 @@ import { getUserById } from "@/data/user";
 import { getTwoFactorConfirmationByUserId } from "./data/two-factor-confirmation";
 import { getAccountByUserId } from "./data/account";
 
-export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
+export const { handlers, auth, signIn, signOut, update } = NextAuth({
   events: {
     async linkAccount({ user }) {
       await db.user.update({
