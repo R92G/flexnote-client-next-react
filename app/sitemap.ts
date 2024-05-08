@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+import { siteMetadata } from "@/lib/siteMetadata";
 // import { allBlogs, Blog } from "@/.contentlayer/generated";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -11,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     {
-      url: "https://hulpmethuren.nl/",
+      url: siteMetadata.siteUrl,
     },
   ];
 }

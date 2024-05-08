@@ -167,7 +167,7 @@ export function RegisterModal() {
     <>
       <hr className="my-4" />
       <Social />
-      <div className="mt-4 text-center text-sm">
+      <div className="mt-4 text-center text-sm pb-8">
         Already have an account?{" "}
         <p
           onClick={toggleBetweenLoginAndRegister}

@@ -1,8 +1,12 @@
-/** @type {import('next').NextConfig} */
+// Importeer de withContentlayer functie uit next-contentlayer
+import { withContentlayer } from "next-contentlayer";
+
+// Definieer je Next.js configuratie
 const nextConfig = {
   images: {
-    domains: ["res.cloudinary.com"],
+    domains: ["res.cloudinary.com", "images.unsplash.com"],
   },
 };
 
-export default nextConfig;
+// Exporteer de configuratie, verrijkt met Contentlayer
+export default withContentlayer(nextConfig);

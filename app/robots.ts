@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+import { siteMetadata } from "@/lib/siteMetadata";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -9,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [""],
       },
     ],
-    sitemap: "https://hulpmethuren.nl/sitemap.xml",
+    sitemap: `${siteMetadata.siteUrl}/sitemap.xml`,
   };
 }

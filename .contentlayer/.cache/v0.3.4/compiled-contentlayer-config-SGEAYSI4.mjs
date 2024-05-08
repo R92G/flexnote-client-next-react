@@ -1,3 +1,4 @@
+// contentlayer.config.js
 import { makeSource, defineDocumentType } from "@contentlayer/source-files";
 import readingTime from "reading-time";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -5,53 +6,52 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import GithubSlugger from "github-slugger";
-
-const Blog = defineDocumentType(() => ({
+var Blog = defineDocumentType(() => ({
   name: "Blog",
   filePathPattern: "**/*.mdx",
   contentType: "mdx",
   fields: {
     title: {
       type: "string",
-      required: true,
+      required: true
     },
     publishedAt: {
       type: "date",
-      required: true,
+      required: true
     },
     updatedAt: {
-      type: "date",
+      type: "date"
     },
     description: {
       type: "string",
-      required: true,
+      required: true
     },
     image: {
-      type: "string",
+      type: "string"
     },
     isPublished: {
       type: "boolean",
-      required: true,
+      required: true
     },
     author: {
       type: "string",
-      required: true,
+      required: true
     },
     tags: {
       type: "list",
       of: {
-        type: "string",
-      },
-    },
+        type: "string"
+      }
+    }
   },
   computedFields: {
     url: {
       type: "string",
-      resolve: (doc) => `/info/${doc._raw.flattenedPath}`,
+      resolve: (doc) => `/info/${doc._raw.flattenedPath}`
     },
     readingTime: {
       type: "json",
-      resolve: (doc) => readingTime(doc.body.raw),
+      resolve: (doc) => readingTime(doc.body.raw)
     },
     toc: {
       type: "json",
@@ -62,46 +62,40 @@ const Blog = defineDocumentType(() => ({
           ({ groups }) => {
             const flag = groups?.flag;
             const content = groups?.content;
-
             return {
-              level:
-                flag?.length == 1 ? "one" : flag?.length == 2 ? "two" : "three",
+              level: flag?.length == 1 ? "one" : flag?.length == 2 ? "two" : "three",
               text: content,
-              slug: content ? slugger.slug(content) : undefined,
+              slug: content ? slugger.slug(content) : void 0
             };
           }
         );
-
         return headings;
-      },
-    },
-  },
+      }
+    }
+  }
 }));
-
-const codeOptions = {
-  theme: "github-dark",
-  grid: false,
-};
-
-export default makeSource({
+var contentlayer_config_default = makeSource({
   /* options */
   contentDirPath: "content",
-  documentTypes: [Blog],
-  disableCache: true,
-  mdx: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [
-      rehypeSlug,
-      [
-        rehypeAutolinkHeadings,
-        {
-          behavior: "wrap",
-          properties: {
-            className: ["heading-anchor"],
-          },
-        },
-      ],
-      [rehypePrettyCode, codeOptions],
-    ],
-  },
+  documentTypes: [Blog]
+  // mdx: {
+  //   remarkPlugins: [remarkGfm],
+  //   rehypePlugins: [
+  //     rehypeSlug,
+  //     [
+  //       rehypeAutolinkHeadings,
+  //       {
+  //         behavior: "wrap",
+  //         properties: {
+  //           className: ["heading-anchor"], // Voegt de 'heading-anchor' class toe aan elke heading
+  //         },
+  //       },
+  //     ],
+  //     [rehypePrettyCode, codeOptions],
+  //   ],
+  // },
 });
+export {
+  contentlayer_config_default as default
+};
+//# sourceMappingURL=compiled-contentlayer-config-SGEAYSI4.mjs.map

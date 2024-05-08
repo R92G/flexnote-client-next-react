@@ -9,12 +9,49 @@ import { Navbar } from "./components/Navbar";
 import { Toaster } from "./components/ui/sonner";
 import { SessionProvider } from "next-auth/react";
 import NotifyScript from "./components/NotifyScript";
+import { siteMetadata } from "@/lib/siteMetadata";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Notify - A notification service ",
-  description: "Notify is a notification service for developers",
+  metadataBase: new URL(siteMetadata.siteUrl),
+  alternates: {
+    canonical: "/",
+  },
+  title: {
+    default: siteMetadata.title,
+    template: "%s | Simplify Engagement",
+  },
+  description: siteMetadata.description,
+  keywords: siteMetadata.keywords,
+  openGraph: {
+    title: siteMetadata.title,
+    description: siteMetadata.description,
+    url: siteMetadata.siteUrl,
+    siteName: siteMetadata.title,
+    images: [siteMetadata.socialBanner],
+    locale: "en-US",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteMetadata.title,
+    images: [siteMetadata.socialBanner],
+    description: siteMetadata.description,
+    site: siteMetadata.title,
+  },
 };
 
 export default async function RootLayout({
