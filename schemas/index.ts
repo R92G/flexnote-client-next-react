@@ -90,7 +90,10 @@ export const NotificationSchema = z.object({
   page: z
     .string()
     .min(1, "Page may not be empty - use '/' for homepage")
-    .max(100, "Page identifier must be 100 characters or less"),
+    .max(100, "Page identifier must be 100 characters or less")
+    .refine((value) => value.startsWith("/"), {
+      message: "Page must start with '/'",
+    }),
   websiteId: z.string(),
   showTimeInMs: z
     .number()
