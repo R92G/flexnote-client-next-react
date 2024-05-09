@@ -29,6 +29,13 @@ export const authRoutes = [
 ];
 
 /**
+ * An array of routes where you need to be admin to access
+ * @type {string[]}
+ */
+
+export const adminRoutes = ["/admin-dashboard", "/admin-dashboard/users"];
+
+/**
  * The prefix for API authentication routes
  * Routes that start with this prefix are used for API authentication
  * @type {string}

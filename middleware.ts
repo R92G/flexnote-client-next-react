@@ -1,5 +1,4 @@
 import NextAuth from "next-auth";
-
 import authConfig from "@/auth.config";
 import {
   DEFAULT_LOGIN_REDIRECT,
@@ -7,6 +6,7 @@ import {
   authRoutes,
   publicRoutes,
   disabledRoutes,
+  adminRoutes,
 } from "@/routes";
 
 const { auth } = NextAuth(authConfig);
@@ -19,8 +19,9 @@ export default auth((req: any): any => {
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   const isDisabledRoute = disabledRoutes.includes(nextUrl.pathname);
+  const isAdminRoute = adminRoutes.includes(nextUrl.pathname);
 
-  // Navigate disabled routes to the home page
+  // Redirect disabled routes to the home page
   if (isDisabledRoute) {
     return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
   }
@@ -36,14 +37,13 @@ export default auth((req: any): any => {
     return null;
   }
 
+  // Redirect niet-ingelogde gebruikers die geen toegang hebben tot openbare routes
   if (!isLoggedIn && !isPublicRoute) {
     let callbackUrl = nextUrl.pathname;
     if (nextUrl.search) {
       callbackUrl += nextUrl.search;
     }
-
     const encodedCallbackUrl = encodeURIComponent(callbackUrl);
-
     return Response.redirect(
       new URL(`/auth/login?callbackUrl=${encodedCallbackUrl}`, nextUrl)
     );
