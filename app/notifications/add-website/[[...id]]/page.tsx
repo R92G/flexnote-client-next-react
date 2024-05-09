@@ -104,7 +104,7 @@ const Page = ({ params }: any) => {
       });
     };
     fetchWebsite();
-  }, []);
+  }, [websiteId, currentUser]);
 
   const form = useForm<z.infer<typeof WebsiteSchema>>({
     resolver: zodResolver(WebsiteSchema),

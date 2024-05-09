@@ -94,7 +94,7 @@ const Page = ({ params }: any) => {
     };
 
     fetchNotification();
-  }, []);
+  }, [notificationId]);
 
   const selectOnChange = (value: string) => {
     const website = websites.find((website) => website.id === value);
