@@ -344,7 +344,7 @@ const Page = ({ params }: any) => {
                               <TooltipProvider>
                                 <Tooltip>
                                   <TooltipTrigger asChild>
-                                    <MessageCircleWarning className="h-5 w-5" />
+                                    <MessageCircleWarning className="h-5 w-5 hidden lg:block" />
                                   </TooltipTrigger>
                                   <TooltipContent side="right">
                                     1000ms = 1 second
