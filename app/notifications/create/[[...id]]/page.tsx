@@ -63,9 +63,7 @@ const Page = ({ params }: any) => {
   const [isPending, startTransition] = useTransition();
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
   const [websites, setWebsites] = useState<Website[]>([]);
-  const [notificationId, setNotificationId] = useState<string | undefined>(
-    id[0] as string
-  );
+  const [notificationId, setNotificationId] = useState<string>(id?.[0] || "");
 
   // get notification by id
   useEffect(() => {
@@ -139,7 +137,10 @@ const Page = ({ params }: any) => {
   const imgUrl = form.watch("imgUrl");
 
   const setCustomValue = (id: any, value: any) => {
-    form.setValue(id, value, {
+    const numFields = ["delayInMs", "showTimeInMs"];
+    const isNumField = numFields.includes(id);
+
+    form.setValue(id, isNumField ? Number(value) || 0 : value, {
       shouldDirty: true,
       shouldTouch: true,
       shouldValidate: true,
@@ -357,6 +358,9 @@ const Page = ({ params }: any) => {
                                 disabled={isPending}
                                 type="number"
                                 placeholder="2000ms (2 seconds)"
+                                onChange={(e) =>
+                                  setCustomValue(field.name, e.target.value)
+                                }
                               />
                             </FormControl>
                             <FormMessage />
@@ -378,6 +382,9 @@ const Page = ({ params }: any) => {
                               disabled={isPending}
                               type="number"
                               placeholder="3000ms (3 seconds)"
+                              onChange={(e) =>
+                                setCustomValue(field.name, e.target.value)
+                              }
                             />
                           </FormControl>
                           <FormMessage />

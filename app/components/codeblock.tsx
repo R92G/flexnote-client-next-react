@@ -16,15 +16,14 @@ const CodeBlock = ({ id }: CodeBlockProps) => {
   const [copied, setCopied] = useState(false);
 
   const code = `
-  <script id="Notify">
+  <script id="flexnote">
   (function() {
-    const id = ${id}; 
     const scriptElement = document.createElement('script');
-    scriptElement.src = 'https://noti-widget.vercel.app/assets/index.js';
-    scriptElement.setAttribute('websiteId', id);
-    scriptElement.type = 'module';
+    scriptElement.src = 'https://noti-widget.vercel.app/assets/index.js'
+    scriptElement.setAttribute('websiteId', '${id}');
+    scriptElement.type = 'module'
     document.body.appendChild(scriptElement);
-  })();
+})();
 </script>`;
 
   const handleCopy = () => {

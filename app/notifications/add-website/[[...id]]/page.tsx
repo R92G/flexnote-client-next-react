@@ -42,7 +42,6 @@ import { useRouter } from "next/navigation";
 import useGlobalWebsiteCount from "@/hooks/useGlobalWebsiteCount";
 import CodeBlock from "@/app/components/codeblock";
 import { emailScriptTag } from "@/actions/emailScriptTag";
-import { usePathname } from "next/navigation";
 import {
   updateWebsite,
   createWebsite,
@@ -52,8 +51,9 @@ const schema = z.object({
   email: z.string().email(),
 });
 
-const Page = () => {
-  const pathname = usePathname();
+const Page = ({ params }: any) => {
+  const { id } = params;
+
   const router = useRouter();
   const currentUser = useCurrentUser();
   const [error, setError] = useState<string | undefined>("");
@@ -65,6 +65,7 @@ const Page = () => {
   const { onAdd } = useGlobalWebsiteCount();
   const [email, setEmail] = useState("");
   const [errorEmail, setErrorEmail] = useState<string | undefined>("");
+  const [websiteId, setWebsiteId] = useState<string>(id?.[0] || "");
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -77,7 +78,7 @@ const Page = () => {
 
     try {
       const validatedData = schema.parse({ email });
-      await emailScriptTag(validatedData.email, newWebsiteId as string);
+      await emailScriptTag(validatedData.email, websiteId as string);
       setErrorEmail("");
       setEmailSent(true);
     } catch (err: any) {
@@ -85,9 +86,6 @@ const Page = () => {
       setErrorEmail("Invalid email address");
     }
   };
-
-  // get last segment
-  const websiteId = pathname.split("/").pop();
 
   // get website by id
   useEffect(() => {
@@ -148,7 +146,7 @@ const Page = () => {
               data.url,
               currentUser?.id as string
             );
-            setNewWebsiteId(id);
+            setWebsiteId(id);
             setSuccess("Website created successfully");
             onAdd();
             setScriptTagDialogOpen(true);
@@ -166,10 +164,12 @@ const Page = () => {
       <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 py-16 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
         <Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-0">
           <CardHeader className="pb-12">
-            <CardTitle>New Website</CardTitle>
+            <CardTitle>{websiteId == "" ? "New" : "Your"} Website</CardTitle>
 
             <CardDescription className="max-w-lg text-balance leading-relaxed">
-              Create a new website to display notifications on.
+              {websiteId == ""
+                ? "Create a new website to display notifications on."
+                : "Edit your website"}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -229,6 +229,14 @@ const Page = () => {
             >
               {websiteId === "" ? "Create Website" : "Update Website"}
             </Button>
+            {websiteId !== "" ? (
+              <Button
+                variant={"outline"}
+                onClick={() => setScriptTagDialogOpen(true)}
+              >
+                Show tag
+              </Button>
+            ) : null}
             {success !== "" && (
               <Button
                 variant={"secondary"}
@@ -254,7 +262,7 @@ const Page = () => {
               Place the following script tag at the end of the body tag of your
               website. Dont have access to your website? Send this script tag to
               your Developer.
-              <CodeBlock id={newWebsiteId as string} />
+              <CodeBlock id={websiteId as string} />
             </AlertDialogDescription>
           </AlertDialogHeader>
 
