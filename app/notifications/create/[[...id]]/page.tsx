@@ -44,7 +44,7 @@ import {
 import Notification from "@/app/components/notification";
 import { MessageCircleWarning } from "lucide-react";
 import { Website } from "@prisma/client";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { getNotificationById } from "@/actions/notifications/getNotificationById";
 import { getWebsitesByUserId } from "@/actions/websites/getWebsitesByUserId";
 import {
@@ -53,8 +53,9 @@ import {
 } from "@/actions/notifications/notificationActions";
 import { Switch } from "@/app/components/ui/switch";
 
-const Page = () => {
-  const pathname = usePathname();
+const Page = ({ params }: any) => {
+  const { id } = params;
+
   const router = useRouter();
   const currentUser = useCurrentUser();
   const [error, setError] = useState<string | undefined>("");
@@ -62,21 +63,9 @@ const Page = () => {
   const [isPending, startTransition] = useTransition();
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
   const [websites, setWebsites] = useState<Website[]>([]);
-
-  const getInitialNotificationId = () => {
-    const segments = pathname.split("/");
-    const lastSegment = segments[segments.length - 1]; // get the last segment
-    return lastSegment !== "create" ? lastSegment : "";
-  };
-
-  const [notificationId, setNotificationId] = useState(
-    getInitialNotificationId
+  const [notificationId, setNotificationId] = useState<string | undefined>(
+    id[0] as string
   );
-
-  useEffect(() => {
-    const id = getInitialNotificationId();
-    setNotificationId(id);
-  }, [pathname]);
 
   // get notification by id
   useEffect(() => {
@@ -177,7 +166,7 @@ const Page = () => {
           if (data.id !== "") {
             // De ID is aanwezig, voer een update uit
             await updateNotification(data);
-            console.log(data);
+
             setSuccess("Notification updated successfully");
           } else {
             // Geen ID, maak een nieuwe website
@@ -407,7 +396,6 @@ const Page = () => {
                             <div className=" flex gap-8 items-center">
                               <ImageUpload
                                 onChange={(value) => {
-                                  console.log(value);
                                   setCustomValue("imgUrl", value);
                                 }}
                                 value={imgUrl as string}
