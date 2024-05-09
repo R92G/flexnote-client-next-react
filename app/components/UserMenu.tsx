@@ -40,9 +40,21 @@ export function UserMenu({ currentUser }: UserMenuProps) {
             >
               Dashboard
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => {}}>Settings</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => {}}>Upgrades</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => {}}>Contact</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                router.push("/settings");
+              }}
+            >
+              Settings
+            </DropdownMenuItem>
+
+            <DropdownMenuItem
+              onClick={() => {
+                router.push("/contact");
+              }}
+            >
+              Contact
+            </DropdownMenuItem>
             <hr />
 
             <LogoutButton>

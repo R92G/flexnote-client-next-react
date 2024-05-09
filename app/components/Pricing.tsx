@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Check } from "lucide-react";
+import useRegisterModal from "../hooks/useRegisterModal";
 
 enum PopularPlanType {
   NO = 0,
@@ -71,6 +72,7 @@ const pricingList: PricingProps[] = [
 ];
 
 export const Pricing = () => {
+  const registerModal = useRegisterModal();
   return (
     <section id="pricing" className="container py-12 sm:py-24">
       <h2 className="text-3xl md:text-4xl font-bold text-center">
@@ -112,7 +114,9 @@ export const Pricing = () => {
             </CardHeader>
 
             <CardContent>
-              <Button className="w-full">{pricing.buttonText}</Button>
+              <Button onClick={registerModal.onOpen} className="w-full">
+                {pricing.buttonText}
+              </Button>
             </CardContent>
 
             <hr className="w-4/5 m-auto mb-4" />
