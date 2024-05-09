@@ -2,13 +2,11 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Hulp met Huren",
-    short_name: "Hulp met Huren",
-    description: "Vind snel een nieuwe huurwoning",
+    name: "Flexnote",
+    short_name: "Flexnote",
+    description: "Lightweight Notification Manager",
     start_url: "/",
     display: "standalone",
-    background_color: "#fff",
-    theme_color: "#fff",
     icons: [
       {
         src: "/favicon.ico",
