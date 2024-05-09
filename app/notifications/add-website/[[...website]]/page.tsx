@@ -2,7 +2,6 @@
 import React, { useState, useTransition, useEffect } from "react";
 import { useCurrentUser } from "@/app/hooks/use-current-user";
 import { Button } from "@/app/components/ui/button";
-import ImageUpload from "@/app/components/ImageUpload";
 import { WebsiteSchema } from "@/schemas";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -13,13 +12,11 @@ import { FormSuccess } from "@/app/components/auth/form-success";
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/app/components/ui/alert-dialog";
 import {
   Card,
@@ -38,19 +35,18 @@ import {
   FormLabel,
 } from "@/app/components/ui/form";
 import { X } from "lucide-react";
-import { Website } from "@prisma/client";
-import { usePathname } from "next/navigation";
 import { getNotificationById } from "@/actions/notifications/getNotificationById";
 import { getWebsitesByUserId } from "@/actions/websites/getWebsitesByUserId";
-import {
-  createWebsite,
-  updateWebsite,
-} from "@/actions/websites/websiteActions";
 import { getWebsiteByWebsiteId } from "@/actions/websites/getWebsiteByWebsiteId";
 import { useRouter } from "next/navigation";
 import useGlobalWebsiteCount from "@/hooks/useGlobalWebsiteCount";
 import CodeBlock from "@/app/components/codeblock";
 import { emailScriptTag } from "@/actions/emailScriptTag";
+import { usePathname } from "next/navigation";
+import {
+  updateWebsite,
+  createWebsite,
+} from "@/actions/websites/websiteActions";
 
 const schema = z.object({
   email: z.string().email(),

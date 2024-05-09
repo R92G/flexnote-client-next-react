@@ -62,11 +62,21 @@ const Page = () => {
   const [isPending, startTransition] = useTransition();
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
   const [websites, setWebsites] = useState<Website[]>([]);
-  const [notificationId, setNotificationId] = useState<string>(() => {
+
+  const getInitialNotificationId = () => {
     const segments = pathname.split("/");
-    const lastSegment = segments.pop();
-    return lastSegment === "create" ? "" : (lastSegment as string);
-  });
+    const lastSegment = segments[segments.length - 1]; // get the last segment
+    return lastSegment !== "create" ? lastSegment : "";
+  };
+
+  const [notificationId, setNotificationId] = useState(
+    getInitialNotificationId
+  );
+
+  useEffect(() => {
+    const id = getInitialNotificationId();
+    setNotificationId(id);
+  }, [pathname]);
 
   // get notification by id
   useEffect(() => {
@@ -77,10 +87,7 @@ const Page = () => {
       if (!notificationId) return;
       const result = await getNotificationById(notificationId);
       if (result) {
-        // Assuming result contains the notification data
         const notificationData = result; // Modify according to actual data structure
-        // Set form values
-        // Reset the form with fetched data and clear any validation errors
 
         form.reset({
           id: notificationData.id,
@@ -186,7 +193,7 @@ const Page = () => {
   };
 
   return (
-    <div className="flex flex-col sm:gap-4 sm:pl-14">
+    <div className="flex flex-col sm:gap-4 sm:pl-14 overflow-hidden">
       <main className="grid flex-1 items-start gap-4 px-4 sm:px-6 py-20 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
         <Card
           className="col-span-1 sm:col-span-2 w-full"
