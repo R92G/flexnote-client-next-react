@@ -1,4 +1,4 @@
-// contentlayer.config.js
+// contentlayer.config.ts
 import { makeSource, defineDocumentType } from "@contentlayer/source-files";
 import readingTime from "reading-time";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -74,28 +74,33 @@ var Blog = defineDocumentType(() => ({
     }
   }
 }));
+var codeOptions = {
+  theme: "github-dark",
+  grid: false
+};
 var contentlayer_config_default = makeSource({
   /* options */
   contentDirPath: "content",
-  documentTypes: [Blog]
-  // mdx: {
-  //   remarkPlugins: [remarkGfm],
-  //   rehypePlugins: [
-  //     rehypeSlug,
-  //     [
-  //       rehypeAutolinkHeadings,
-  //       {
-  //         behavior: "wrap",
-  //         properties: {
-  //           className: ["heading-anchor"], // Voegt de 'heading-anchor' class toe aan elke heading
-  //         },
-  //       },
-  //     ],
-  //     [rehypePrettyCode, codeOptions],
-  //   ],
-  // },
+  disableImportAliasWarning: true,
+  documentTypes: [Blog],
+  mdx: {
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [
+      rehypeSlug,
+      [
+        rehypeAutolinkHeadings,
+        {
+          behavior: "wrap",
+          properties: {
+            className: ["heading-anchor"]
+          }
+        }
+      ],
+      [rehypePrettyCode, codeOptions]
+    ]
+  }
 });
 export {
   contentlayer_config_default as default
 };
-//# sourceMappingURL=compiled-contentlayer-config-SGEAYSI4.mjs.map
+//# sourceMappingURL=compiled-contentlayer-config-TLSAQOO4.mjs.map

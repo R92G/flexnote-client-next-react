@@ -166,7 +166,7 @@ const Page = () => {
   };
 
   return (
-    <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
+    <div className="flex flex-col sm:gap-4 py-16 sm:pl-14">
       <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 py-16 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
         <Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-0">
           <CardHeader className="pb-12">

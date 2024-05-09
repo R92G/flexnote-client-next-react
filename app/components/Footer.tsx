@@ -32,15 +32,15 @@ export const Footer = () => {
     <footer id="footer">
       <hr className="w-11/12 mx-auto" />
 
-      <section className="container py-20 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-x-12 gap-y-8">
+      <section className="container py-20 grid grid-cols-1 md:grid-cols-4 xl:grid-cols-6 gap-x-12 gap-y-8">
         <div className="col-span-full xl:col-span-2">
-          <a href="/" className="font-bold text-xl flex">
+          <a href="/" className="font-bold text-xl flex justify-center">
             <LogoIcon />
             ShadcnUI/React
           </a>
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 mx-auto">
           {routeList.map(({ href, label }) => (
             <div key={href}>
               <a href={href} className="opacity-60 hover:opacity-100">

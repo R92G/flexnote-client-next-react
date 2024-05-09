@@ -65,7 +65,7 @@ const featureList: string[] = [
 export const Features = () => {
   return (
     <section id="features" className="container py-12 sm:py-24 space-y-8">
-      <h2 className="text-3xl lg:text-4xl font-bold md:text-center">
+      <h2 className="text-3xl lg:text-4xl font-bold text-center">
         Many{" "}
         <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
           Use Cases
@@ -75,7 +75,7 @@ export const Features = () => {
         When should you use Flexnote? Here are some of the most common use cases
       </p>
 
-      <div className="flex flex-wrap md:justify-center gap-4">
+      <div className="flex flex-wrap justify-center gap-4">
         {featureList.map((feature: string) => (
           <div key={feature}>
             <Badge variant="secondary" className="text-sm">

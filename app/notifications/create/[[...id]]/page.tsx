@@ -186,9 +186,12 @@ const Page = () => {
   };
 
   return (
-    <div className="flex flex-col sm:gap-4  sm:pl-14">
-      <main className="grid flex-1 items-start gap-4 pl-4 pr-4 sm:px-6 py-20 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
-        <Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-0">
+    <div className="flex flex-col sm:gap-4 sm:pl-14">
+      <main className="grid flex-1 items-start gap-4 px-4 sm:px-6 py-20 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
+        <Card
+          className="col-span-1 sm:col-span-2 w-full"
+          x-chunk="dashboard-05-chunk-0"
+        >
           <CardHeader className="pb-12">
             <CardTitle>New Notification</CardTitle>
             <CardDescription className="max-w-lg text-balance leading-relaxed">
@@ -441,7 +444,7 @@ const Page = () => {
               </form>
             </Form>
           </CardContent>
-          <CardFooter className="flex gap-4">
+          <CardFooter className="flex gap-8">
             <Button
               disabled={
                 form.watch("sender") === "" || form.watch("message") === ""
@@ -449,14 +452,14 @@ const Page = () => {
               variant={"outline"}
               onClick={previewNotification}
             >
-              Preview Notification
+              Preview
             </Button>
             <Button onClick={createNotificationLocal}>
               {notificationId !== ""
-                ? "Update Notification"
+                ? "Update"
                 : success === ""
-                ? "Create Notification"
-                : "Create another notification"}
+                ? "Create"
+                : "Create new"}
             </Button>
           </CardFooter>
         </Card>

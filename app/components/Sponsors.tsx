@@ -28,7 +28,7 @@ const sponsors: SponsorProps[] = [
   },
   {
     icon: <ArrowRightFromLine size={34} />,
-    name: "Improve your Customer Experience",
+    name: "Improve Customer Experience",
   },
 ];
 

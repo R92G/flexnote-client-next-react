@@ -75,7 +75,7 @@ export const Navbar = ({ currentUser }: NavbarProps) => {
           </NavigationMenuItem>
 
           {/* mobile */}
-          <span className="flex md:hidden">
+          <span className="flex gap-2 md:hidden">
             <UserMenu currentUser={currentUser} />
             <ModeToggle />
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -102,7 +102,6 @@ export const Navbar = ({ currentUser }: NavbarProps) => {
                       {label}
                     </Link>
                   ))}
-                  <UserMenu currentUser={currentUser} />
                 </nav>
               </SheetContent>
             </Sheet>

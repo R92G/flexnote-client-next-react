@@ -81,6 +81,7 @@ var codeOptions = {
 var contentlayer_config_default = makeSource({
   /* options */
   contentDirPath: "content",
+  disableImportAliasWarning: true,
   documentTypes: [Blog],
   disableCache: true,
   mdx: {
@@ -93,7 +94,6 @@ var contentlayer_config_default = makeSource({
           behavior: "wrap",
           properties: {
             className: ["heading-anchor"]
-            // Voegt de 'heading-anchor' class toe aan elke heading
           }
         }
       ],
@@ -104,4 +104,4 @@ var contentlayer_config_default = makeSource({
 export {
   contentlayer_config_default as default
 };
-//# sourceMappingURL=compiled-contentlayer-config-XJVTWLJZ.mjs.map
+//# sourceMappingURL=compiled-contentlayer-config-EQQKOEBN.mjs.map
