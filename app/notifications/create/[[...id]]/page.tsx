@@ -55,7 +55,6 @@ import { Switch } from "@/app/components/ui/switch";
 
 const Page = ({ params }: any) => {
   const { id } = params;
-  console.log(id);
 
   const router = useRouter();
   const currentUser = useCurrentUser();
