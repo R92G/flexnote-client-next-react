@@ -55,6 +55,7 @@ import { Switch } from "@/app/components/ui/switch";
 
 const Page = ({ params }: any) => {
   const { id } = params;
+  console.log(id);
 
   const router = useRouter();
   const currentUser = useCurrentUser();
@@ -97,6 +98,7 @@ const Page = ({ params }: any) => {
   }, [notificationId]);
 
   const selectOnChange = (value: string) => {
+    if (params.id) return;
     const website = websites.find((website) => website.id === value);
     setCustomValue("websiteId", website?.id as string);
   };
