@@ -7,7 +7,7 @@ export const HeroCards = () => {
   const notifications = [
     {
       alt: "Instagram Logo",
-      imgUrl: "/hero/instagram.jpeg",
+      imgUrl: "/hero/img-insta-min.png",
       message: "Follow us on Instagram",
       sender: "Thanks for your purchase!",
     },

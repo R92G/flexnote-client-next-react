@@ -21,7 +21,6 @@ const Notification = ({
   message,
   link,
   showTimeInMs,
-  delayInMs,
 }: NotificationProps) => {
   const handleOnClick = () => {
     if (!link) {
@@ -52,15 +51,19 @@ const Notification = ({
   }, [isNotificationVisible, setIsNotificationVisible, showTimeInMs]);
 
   return (
-    <div id="notification-area123" style={notificationStyle}>
-      <div onClick={handleOnClick} className="notification123">
-        {imgUrl && <img src={imgUrl} alt="Notification123 Icon" />}
+    <div id="notification-area2008" style={notificationStyle}>
+      <div
+        onClick={handleOnClick}
+        style={notificationStyle}
+        className="notification2008"
+      >
+        {imgUrl && <img src={imgUrl} alt="Notification2008 Icon" />}
         <div
           onClick={(e: any) => {
             e.stopPropagation();
             setIsNotificationVisible(false);
           }}
-          className="close--icon123"
+          className="close--icon2008"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -71,9 +74,9 @@ const Notification = ({
             <path d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"></path>
           </svg>
         </div>
-        <div className="content-wrapper123">
-          <div className="sender123">{sender}</div>
-          <div className="message123">{message}</div>
+        <div className="content-wrapper2008">
+          <div className="sender2008">{sender}</div>
+          <div className="message2008">{message}</div>
         </div>
       </div>
     </div>

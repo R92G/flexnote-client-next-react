@@ -12,6 +12,10 @@ const sponsors: SponsorProps[] = [
   },
   {
     icon: <ArrowRightFromLine size={34} />,
+    name: "No user permissions required",
+  },
+  {
+    icon: <ArrowRightFromLine size={34} />,
     name: "Effective communication",
   },
   {
