@@ -49,14 +49,18 @@ const CodeBlock = ({ id }: CodeBlockProps) => {
       </SyntaxHighlighter>
       <button
         className={cn(
-          "absolute top-2 right-2 bg-white text-secondary-foreground h-8 w-8 flex justify-center items-center rounded-full border border-secondary-foreground transition-all duration-300",
+          "absolute top-2 right-2 bg-white text-secondary-foreground h-6 w-6 flex justify-center items-center rounded-full border border-secondary-foreground transition-all duration-300",
           copied
             ? "bg-green-500 text-white"
             : "hover:bg-secondary-foreground hover:text-white"
         )}
         onClick={handleCopy}
       >
-        {copied ? <CopyCheck size={20} /> : <Copy size={20} />}
+        {copied ? (
+          <CopyCheck size={15} />
+        ) : (
+          <Copy className="text-black" size={15} />
+        )}
       </button>
     </div>
   );
