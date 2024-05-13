@@ -68,7 +68,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
                 height={50}
                 src={value as string}
                 alt="Notification Image"
-                className="rounded-full object-cover !w-[50px] !h-[50px] object-top"
+                className="rounded-[5px] object-cover !w-[50px] !h-[50px] object-top"
               />
             )}
           </div>
