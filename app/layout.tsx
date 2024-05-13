@@ -10,6 +10,7 @@ import { Toaster } from "./components/ui/sonner";
 import { SessionProvider } from "next-auth/react";
 import NotifyScript from "./components/NotifyScript";
 import { siteMetadata } from "@/lib/siteMetadata";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -79,6 +80,7 @@ export default async function RootLayout({
             {children}
           </ThemeProvider>
           <NotifyScript />
+          <Analytics />
         </body>
       </html>
     </SessionProvider>
