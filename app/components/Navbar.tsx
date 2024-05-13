@@ -88,7 +88,7 @@ export const Navbar = ({ currentUser }: NavbarProps) => {
               <SheetContent side={"left"} className="w-full">
                 <SheetHeader>
                   <SheetTitle className="font-bold text-xl">
-                    Shadcn/React
+                    Flexnote
                   </SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col justify-center items-center gap-2 mt-4">

@@ -30,7 +30,7 @@ const NotificationHeroCard = ({
       </div>
       <div className="content-wrapper444">
         <div className="sender444">{sender}</div>
-        <hr />
+
         <div className="message444">{message}</div>
       </div>
     </div>

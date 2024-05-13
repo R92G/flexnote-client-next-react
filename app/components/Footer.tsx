@@ -36,7 +36,7 @@ export const Footer = () => {
         <div className="col-span-full xl:col-span-2">
           <a href="/" className="font-bold text-xl flex justify-center">
             <LogoIcon />
-            ShadcnUI/React
+            Flexnote{" "}
           </a>
         </div>
 

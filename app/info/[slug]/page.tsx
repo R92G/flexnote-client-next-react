@@ -148,7 +148,10 @@ export default async function BlogPage({ params }: { params: Params }) {
               <ul className="mt-4 font-in text-base">
                 {blog.toc.map((heading: any) => {
                   return (
-                    <li key={`#${heading.slug}`} className="py-1">
+                    <li
+                      key={`#${heading.slug}`}
+                      className="py-1 cursor-pointer"
+                    >
                       <a
                         href={`#${heading.slug}`}
                         data-level={heading.level}
@@ -156,7 +159,7 @@ export default async function BlogPage({ params }: { params: Params }) {
                                        data-[level=two]:border-t border-solid border-black/40
                                        data-[level=three]:pl-4 data-[level=three]:font-light
                                        sm:data-[level=three]:pl-6
-                                       flex items-center justify-start
+                                       flex items-center justify-start cursor-pointer
                                        "
                       >
                         {heading.level === "three" ? (

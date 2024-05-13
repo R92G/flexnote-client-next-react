@@ -73,7 +73,6 @@ const Notification = ({
         </div>
         <div className="content-wrapper123">
           <div className="sender123">{sender}</div>
-          <hr />
           <div className="message123">{message}</div>
         </div>
       </div>

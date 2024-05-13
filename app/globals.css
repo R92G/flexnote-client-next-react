@@ -251,22 +251,22 @@ code[data-line-numbers-max-digits="3"] > [data-line]::before {
 /* Styles within blog-post class */
 .blog-post h1 {
   font-size: 2.25rem; /* Tailwind text-4xl */
-  margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin-top: 1;
+  margin-bottom: 3rem;
   color: hsl(var(--foreground));
 }
 
 .blog-post h2 {
   font-size: 1.875rem; /* Tailwind text-3xl */
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
   color: hsl(var(--foreground));
 }
 
 .blog-post h3 {
   font-size: 1.5rem; /* Tailwind text-2xl */
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
   color: hsl(var(--foreground));
 }
 
