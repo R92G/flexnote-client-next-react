@@ -85,7 +85,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     <body>
       <div class="container">
         <h2>Confirm your e-mail</h2>
-        <p>Klik op de onderstaande knop om uw e-mailadres te bevestigen:</p>
+        <p>Click the button below to confirm your e-mail:</p>
         <p><a href="${confirmLink}" class="button">Confirm e-mail</a></p>
         <p>Thank you for using Flexnote!</p>
       </div>
