@@ -10,7 +10,14 @@ export const disabledRoutes = ["/admin"];
  * @type {string[]}
  */
 
-export const publicRoutes = ["/", "/auth/new-verification", "/auth/reset"];
+export const publicRoutes = [
+  "/",
+  "/auth/new-verification",
+  "/auth/reset",
+  "/info",
+  "/info/how-to-show-notifications-on-your-website",
+  "/info/strategic-website-notifications",
+];
 
 /**
  * An array of routes that are used for authentication. These routes are used to
