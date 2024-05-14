@@ -70,6 +70,8 @@ export function RegisterModal() {
         <CardDescription>Enter your information to register</CardDescription>
       </CardHeader>
       <CardContent>
+        <Social />
+        <hr className="my-4" />
         <Form {...form}>
           <form>
             <div className="grid  gap-4 pb-4">
@@ -165,8 +167,6 @@ export function RegisterModal() {
 
   const footer = (
     <>
-      <hr className="my-4" />
-      <Social />
       <div className="mt-4 text-center text-sm pb-8">
         Already have an account?{" "}
         <p

@@ -91,9 +91,11 @@ export function LoginModal() {
         <CardDescription>Enter your information to log in</CardDescription>
       </CardHeader>
       <CardContent>
+        <Social />
+        <hr className="my-4" />
         <Form {...form}>
           <form>
-            <div className="grid gap-4 pb-8">
+            <div className="grid gap-4">
               {showTwoFactor && (
                 <div className="grid gap-2">
                   <FormField
@@ -185,8 +187,6 @@ export function LoginModal() {
 
   const footer = (
     <>
-      <hr className="my-4" />
-      <Social />
       <div className="mt-4 text-center text-sm">
         Don&apos;t have an account yet?{" "}
         <p
