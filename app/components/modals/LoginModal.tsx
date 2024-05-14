@@ -167,15 +167,14 @@ export function LoginModal() {
                     asChild
                     className="px-0 font-normal"
                   >
-                    <Link
-                      href={"/auth/reset"}
+                    <p
                       onClick={() => {
                         loginModal.onClose;
                         router.push("/auth/reset");
                       }}
                     >
                       Forgot password?
-                    </Link>
+                    </p>
                   </Button>
                 </>
               )}
