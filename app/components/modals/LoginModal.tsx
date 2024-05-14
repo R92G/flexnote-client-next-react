@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
 import { login } from "@/actions/login";
-import Link from "next/link";
 import Modal from "./Modal";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
@@ -56,36 +55,33 @@ export function LoginModal() {
     registerModal.onOpen();
   };
 
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+  const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
 
-    startTransition(() => {
-      login(values, callbackUrl)
-        .then((data) => {
-          if (data) {
-            if (data.error) {
-              form.reset();
-              setError(data.error);
-            }
-
-            if (data.success) {
-              form.reset();
-              loginModal.onClose();
-              setSuccess(data.success);
-            }
-
-            if (data.twoFactor) {
-              setShowTwoFactor(true);
-            }
-          } else {
-            setError("Something went wrong");
+    try {
+      startTransition(async () => {
+        const data = await login(values);
+        console.log(data);
+        if (data) {
+          if (data.error) {
+            form.reset();
+            setError(data.error);
+          } else if (data.success) {
+            form.reset();
+            loginModal.onClose();
+            setSuccess(data.success);
+            router.refresh();
+          } else if (data.twoFactor) {
+            setShowTwoFactor(true);
           }
-        })
-        .catch((error) => {
+        } else {
           setError("Something went wrong");
-        });
-    });
+        }
+      });
+    } catch (error) {
+      setError("Something went wrong");
+    }
   };
 
   const bodyContent = (
@@ -105,7 +101,7 @@ export function LoginModal() {
                     name="code"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Two Factor Code </FormLabel>
+                        <FormLabel>Two Factor Code</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
@@ -133,7 +129,7 @@ export function LoginModal() {
                               {...field}
                               disabled={isPending}
                               placeholder="h@company.com"
-                              type=""
+                              type="email"
                             />
                           </FormControl>
                           <FormMessage />
