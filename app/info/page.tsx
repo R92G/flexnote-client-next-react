@@ -5,9 +5,9 @@ import BackBar from "../components/BackBar";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Info | Snel een nieuwe huurwoning",
+  title: "Info | Flexible Notifications",
   description:
-    "Alle informatie die je nodig hebt om snel aan een huurwoning te komen.",
+    "All info you need to quickly setup and start using notifications on your website.",
 };
 
 const BlogPage: React.FC = async (props: any) => {

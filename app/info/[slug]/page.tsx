@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: Params }) {
   }));
 
   return {
-    title: `${blog.title} | Snel een nieuwe huurwoning`,
+    title: `${blog.title} | Flexible Notifications`,
     description: blog.description,
     openGraph: {
       title: blog.title,
