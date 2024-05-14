@@ -34,12 +34,7 @@ const pricingList: PricingProps[] = [
     description:
       "An ideal choice for individuals just starting out. Get essential features without any cost.",
     buttonText: "Get Started",
-    benefitList: [
-      "1 Team member",
-      "1 Website",
-      "Up to 6 notifications",
-      "Support",
-    ],
+    benefitList: ["1 Team member", "1 Website", "1 Notification", "Support"],
   },
   {
     title: "Premium",
