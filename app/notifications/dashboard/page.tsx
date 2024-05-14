@@ -79,7 +79,8 @@ export default function Dashboard() {
     };
     fetchWebsites();
     setLoadingWebsites(false);
-  }, []);
+  }, [currentUser]);
+
   useEffect(() => {
     if (!currentWebsite) {
       return;
