@@ -43,11 +43,11 @@ import {
 import { Notification, Website } from "@prisma/client";
 import { useCurrentUser } from "@/app/hooks/use-current-user";
 import axios from "axios";
-import { getWebsitesByUserId } from "@/actions/websites/getWebsitesByUserId";
+import { getWebsitesByUserId } from "@/app/actions/websites/getWebsitesByUserId";
 import Loader from "@/app/components/Loader";
-import { deleteNotification } from "@/actions/notifications/notificationActions";
-import { deleteWebsite } from "@/actions/websites/websiteActions";
-import { getAllUsers, deleteUser } from "@/actions/admin/userActions";
+import { deleteNotification } from "@/app/actions/notifications/notificationActions";
+import { deleteWebsite } from "@/app/actions/websites/websiteActions";
+import { getAllUsers, deleteUser } from "@/app/actions/admin/userActions";
 import { User } from "@prisma/client";
 
 export default function UsersComponent() {

@@ -44,10 +44,10 @@ import {
 import { Notification, Website } from "@prisma/client";
 import { useCurrentUser } from "@/app/hooks/use-current-user";
 import axios from "axios";
-import { getWebsitesByUserId } from "@/actions/websites/getWebsitesByUserId";
+import { getWebsitesByUserId } from "@/app/actions/websites/getWebsitesByUserId";
 import Loader from "@/app/components/Loader";
-import { deleteNotification } from "@/actions/notifications/notificationActions";
-import { deleteWebsite } from "@/actions/websites/websiteActions";
+import { deleteNotification } from "@/app/actions/notifications/notificationActions";
+import { deleteWebsite } from "@/app/actions/websites/websiteActions";
 
 export default function Dashboard() {
   const currentUser = useCurrentUser();

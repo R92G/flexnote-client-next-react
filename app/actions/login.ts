@@ -19,6 +19,7 @@ export const login = async (
   values: z.infer<typeof LoginSchema>,
   callbackUrl?: string | null
 ) => {
+  console.log("values", values);
   const { email, password, code } = LoginSchema.parse(values);
 
   try {

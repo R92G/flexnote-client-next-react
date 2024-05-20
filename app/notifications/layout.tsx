@@ -11,7 +11,7 @@ import Link from "next/link";
 
 import { Button } from "@/app/components/ui/button";
 import Sidebar from "./components/sidebar";
-import { getWebsitesByUserId } from "@/actions/websites/getWebsitesByUserId";
+import { getWebsitesByUserId } from "@/app/actions/websites/getWebsitesByUserId";
 import { currentUser } from "@/lib/auth";
 import NavLoggedIn from "../components/NavLoggedIn";
 import { Navbar } from "../components/Navbar";

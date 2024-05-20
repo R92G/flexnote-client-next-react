@@ -35,15 +35,15 @@ import {
   FormLabel,
 } from "@/app/components/ui/form";
 import { X } from "lucide-react";
-import { getWebsiteByWebsiteId } from "@/actions/websites/getWebsiteByWebsiteId";
+import { getWebsiteByWebsiteId } from "@/app/actions/websites/getWebsiteByWebsiteId";
 import { useRouter } from "next/navigation";
 import useGlobalWebsiteCount from "@/hooks/useGlobalWebsiteCount";
 import CodeBlock from "@/app/components/codeblock";
-import { emailScriptTag } from "@/actions/emailScriptTag";
+import { emailScriptTag } from "@/app/actions/emailScriptTag";
 import {
   updateWebsite,
   createWebsite,
-} from "@/actions/websites/websiteActions";
+} from "@/app/actions/websites/websiteActions";
 
 const schema = z.object({
   email: z.string().email(),
@@ -123,11 +123,13 @@ const Page = ({ params }: any) => {
   };
 
   const createOrUpdateWebsiteLocal = async () => {
+    console.log("CREATE OR UPDATE WEBSITE");
     setError("");
     setSuccess("");
     setIsPending(true);
 
     form.handleSubmit(async (data) => {
+      console.log("DATA", data);
       try {
         if (data.id !== "") {
           // De ID is aanwezig, voer een update uit

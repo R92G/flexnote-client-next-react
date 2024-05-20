@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { resendContactCreate } from "@/actions/createResendContactAction";
+import { resendContactCreate } from "@/app/actions/createResendContactAction";
 import { FormSuccess } from "./form-sucess";
 
 export const Newsletter = () => {

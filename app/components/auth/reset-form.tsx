@@ -20,7 +20,7 @@ import { CardWrapper } from "../auth/card-wrapper";
 import { Button } from "../ui/button";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-sucess";
-import { reset } from "@/actions/reset";
+import { reset } from "@/app/actions/reset";
 
 export const ResetForm = () => {
   const [error, setError] = useState<string | undefined>("");

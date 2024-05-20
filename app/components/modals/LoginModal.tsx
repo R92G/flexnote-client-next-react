@@ -8,7 +8,7 @@ import { LoginSchema } from "@/schemas";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
-import { login } from "@/actions/login";
+import { login } from "@/app/actions/login";
 import Modal from "./Modal";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
@@ -59,9 +59,11 @@ export function LoginModal() {
     setError("");
     setSuccess("");
     setIsPending(true);
-
+    console.log(values);
     try {
+      console.log("try");
       const data = await login(values);
+      console.log("no try", data);
 
       if (data) {
         if (data.error) {
@@ -72,7 +74,6 @@ export function LoginModal() {
           loginModal.onClose();
           setSuccess(data.success);
           router.refresh();
-          router.push("/notifications/dashboard");
         } else if (data.twoFactor) {
           setShowTwoFactor(true);
         }
@@ -212,7 +213,7 @@ export function LoginModal() {
         setSuccess("");
         loginModal.onClose();
       }}
-      onSubmit={form.handleSubmit(onSubmit)}
+      onSubmit={form.handleSubmit(onSubmit)} // deze gaat mis
       body={bodyContent}
       footer={footer}
     />

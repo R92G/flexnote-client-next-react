@@ -45,12 +45,12 @@ import Notification from "@/app/components/notification";
 import { MessageCircleWarning } from "lucide-react";
 import { Website } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import { getNotificationById } from "@/actions/notifications/getNotificationById";
-import { getWebsitesByUserId } from "@/actions/websites/getWebsitesByUserId";
+import { getNotificationById } from "@/app/actions/notifications/getNotificationById";
+import { getWebsitesByUserId } from "@/app/actions/websites/getWebsitesByUserId";
 import {
   createNotification,
   updateNotification,
-} from "@/actions/notifications/notificationActions";
+} from "@/app/actions/notifications/notificationActions";
 import { Switch } from "@/app/components/ui/switch";
 
 const Page = ({ params }: any) => {
