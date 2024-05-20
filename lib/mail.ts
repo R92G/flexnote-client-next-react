@@ -79,7 +79,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
       <style>
         body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }
         .container { width: 80%; margin: 20px auto; padding: 20px; background-color: #f4f4f4; border-radius: 8px; }
-        .button { background-color: #17a2b8; color: #ffffff; padding: 10px 20px; text-align: center; display: inline-block; border-radius: 5px; text-decoration: none; }
+        .button { background-color: #333; color: #ffffff; padding: 10px 20px; text-align: center; display: inline-block; border-radius: 5px; text-decoration: none; }
         h2 { color: #444; }
       </style>
     </head>

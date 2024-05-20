@@ -62,7 +62,7 @@ export function LoginModal() {
     try {
       startTransition(async () => {
         const data = await login(values);
-        console.log(data);
+
         if (data) {
           if (data.error) {
             form.reset();
@@ -72,6 +72,7 @@ export function LoginModal() {
             loginModal.onClose();
             setSuccess(data.success);
             router.refresh();
+            router.push("/notifications/dashboard");
           } else if (data.twoFactor) {
             setShowTwoFactor(true);
           }

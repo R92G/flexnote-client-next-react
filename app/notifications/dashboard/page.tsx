@@ -70,7 +70,8 @@ export default function Dashboard() {
     const fetchWebsites = async () => {
       setLoadingWebsites(true);
       const websites = await getWebsitesByUserId(currentUser.id as string);
-      if (websites.length === 0) {
+      console.log("website", websites);
+      if (websites.length == 0) {
         router.push("/notifications/add-website");
       } else {
         setWebsites(websites);
