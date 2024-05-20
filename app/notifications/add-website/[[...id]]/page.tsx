@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useTransition, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useCurrentUser } from "@/app/hooks/use-current-user";
 import { Button } from "@/app/components/ui/button";
 import { WebsiteSchema } from "@/schemas";
@@ -35,8 +35,6 @@ import {
   FormLabel,
 } from "@/app/components/ui/form";
 import { X } from "lucide-react";
-import { getNotificationById } from "@/actions/notifications/getNotificationById";
-import { getWebsitesByUserId } from "@/actions/websites/getWebsitesByUserId";
 import { getWebsiteByWebsiteId } from "@/actions/websites/getWebsiteByWebsiteId";
 import { useRouter } from "next/navigation";
 import useGlobalWebsiteCount from "@/hooks/useGlobalWebsiteCount";
@@ -58,7 +56,7 @@ const Page = ({ params }: any) => {
   const currentUser = useCurrentUser();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
   const [newWebsiteId, setNewWebsiteId] = useState<string | undefined>("");
   const [scriptTagDialogOpen, setScriptTagDialogOpen] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
@@ -124,39 +122,41 @@ const Page = ({ params }: any) => {
     });
   };
 
-  const createOrUpdateWebsiteLocal = () => {
-    startTransition(() => {
-      setError("");
-      setSuccess("");
-      form.handleSubmit(async (data) => {
-        try {
-          if (data.id !== "") {
-            // De ID is aanwezig, voer een update uit
-            await updateWebsite(
-              data.id as string,
-              data.name,
-              data.url,
-              currentUser?.id as string
-            );
-            setSuccess("Website updated successfully");
-          } else {
-            // Geen ID, maak een nieuwe website
-            const { id } = await createWebsite(
-              data.name,
-              data.url,
-              currentUser?.id as string
-            );
-            setWebsiteId(id);
-            setSuccess("Website created successfully");
-            onAdd();
-            setScriptTagDialogOpen(true);
-          }
-        } catch (error) {
-          console.error("Failed to create or update website:", error);
-          setError("Failed to create or update website");
+  const createOrUpdateWebsiteLocal = async () => {
+    setError("");
+    setSuccess("");
+    setIsPending(true);
+
+    form.handleSubmit(async (data) => {
+      try {
+        if (data.id !== "") {
+          // De ID is aanwezig, voer een update uit
+          await updateWebsite(
+            data.id as string,
+            data.name,
+            data.url,
+            currentUser?.id as string
+          );
+          setSuccess("Website updated successfully");
+        } else {
+          // Geen ID, maak een nieuwe website
+          const { id } = await createWebsite(
+            data.name,
+            data.url,
+            currentUser?.id as string
+          );
+          setWebsiteId(id);
+          setSuccess("Website created successfully");
+          onAdd();
+          setScriptTagDialogOpen(true);
         }
-      })();
-    });
+      } catch (error) {
+        console.error("Failed to create or update website:", error);
+        setError("Failed to create or update website");
+      } finally {
+        setIsPending(false);
+      }
+    })();
   };
 
   return (
@@ -223,10 +223,7 @@ const Page = ({ params }: any) => {
             </Form>
           </CardContent>
           <CardFooter className="flex gap-4">
-            <Button
-              disabled={success !== "" || error !== ""}
-              onClick={createOrUpdateWebsiteLocal}
-            >
+            <Button disabled={isPending} onClick={createOrUpdateWebsiteLocal}>
               {websiteId === "" ? "Create Website" : "Update Website"}
             </Button>
             {websiteId !== "" ? (

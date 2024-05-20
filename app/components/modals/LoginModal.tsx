@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button } from "../ui/button";
 import * as z from "zod";
@@ -40,7 +40,7 @@ export function LoginModal() {
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -58,30 +58,31 @@ export function LoginModal() {
   const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
+    setIsPending(true);
 
     try {
-      startTransition(async () => {
-        const data = await login(values);
+      const data = await login(values);
 
-        if (data) {
-          if (data.error) {
-            form.reset();
-            setError(data.error);
-          } else if (data.success) {
-            form.reset();
-            loginModal.onClose();
-            setSuccess(data.success);
-            router.refresh();
-            router.push("/notifications/dashboard");
-          } else if (data.twoFactor) {
-            setShowTwoFactor(true);
-          }
-        } else {
-          setError("Something went wrong");
+      if (data) {
+        if (data.error) {
+          form.reset();
+          setError(data.error);
+        } else if (data.success) {
+          form.reset();
+          loginModal.onClose();
+          setSuccess(data.success);
+          router.refresh();
+          router.push("/notifications/dashboard");
+        } else if (data.twoFactor) {
+          setShowTwoFactor(true);
         }
-      });
+      } else {
+        setError("Something went wrong");
+      }
     } catch (error) {
       setError("Something went wrong");
+    } finally {
+      setIsPending(false);
     }
   };
 
@@ -168,7 +169,7 @@ export function LoginModal() {
                   >
                     <p
                       onClick={() => {
-                        loginModal.onClose;
+                        loginModal.onClose();
                         router.push("/auth/reset");
                       }}
                     >
