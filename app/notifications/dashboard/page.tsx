@@ -51,9 +51,8 @@ import { deleteWebsite } from "@/actions/websites/websiteActions";
 
 export default function Dashboard() {
   const currentUser = useCurrentUser();
-  const [loadingWebsites, setLoadingWebsites] = useState(false);
-  const [loadingNotifications, setLoadingNotifications] = useState(false);
-  const [currentWebsite, setCurrentWebsite] = useState<Website>();
+  const [loading, setLoading] = useState(true); // Single loading state
+  const [currentWebsite, setCurrentWebsite] = useState<Website | null>(null);
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [websites, setWebsites] = useState<Website[]>([]);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -62,25 +61,31 @@ export default function Dashboard() {
   const [selectedNotificationId, setSelectedNotificationId] = useState("");
   const router = useRouter();
 
-  //Fetch websites and notifications
   useEffect(() => {
     if (!currentUser) {
+      setLoading(false);
       return;
     }
+
     const fetchWebsites = async () => {
-      setLoadingWebsites(true);
-      const websites = await getWebsitesByUserId(currentUser.id as string);
-      console.log("website", websites);
-      if (websites.length == 0) {
-        router.push("/notifications/add-website");
-      } else {
-        setWebsites(websites);
-        setCurrentWebsite(websites[0]);
+      setLoading(true);
+      try {
+        const websites = await getWebsitesByUserId(currentUser.id as string);
+        if (websites.length === 0) {
+          router.push("/notifications/add-website");
+        } else {
+          setWebsites(websites);
+          setCurrentWebsite(websites[0]);
+        }
+      } catch (error) {
+        console.error("Failed to fetch websites:", error);
+      } finally {
+        setLoading(false);
       }
     };
+
     fetchWebsites();
-    setLoadingWebsites(false);
-  }, [currentUser]);
+  }, [currentUser, router]);
 
   useEffect(() => {
     if (!currentWebsite) {
@@ -88,40 +93,61 @@ export default function Dashboard() {
     }
 
     const fetchNotifications = async () => {
-      setLoadingNotifications(true);
-      const result = await axios.post("/api/getNotificationsByWebsiteId", {
-        websiteId: currentWebsite.id,
-      });
-      setNotifications(result.data.notifications);
+      setLoading(true);
+      try {
+        const result = await axios.post("/api/getNotificationsByWebsiteId", {
+          websiteId: currentWebsite.id,
+        });
+        setNotifications(result.data.notifications);
+      } catch (error) {
+        console.error("Failed to fetch notifications:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchNotifications();
-    setLoadingNotifications(false);
   }, [currentWebsite]);
 
   const selectOnChange = (value: string) => {
     const website = websites.find((website) => website.id === value);
-    setCurrentWebsite(website);
+    setCurrentWebsite(website || null);
   };
 
-  const deleteNotificationLocal = () => {
-    deleteNotification(selectedNotificationId);
-    setNotifications(
-      notifications.filter((n) => n.id !== selectedNotificationId)
-    );
-    setDialogOpen(false);
+  const deleteNotificationLocal = async () => {
+    try {
+      await deleteNotification(selectedNotificationId);
+      setNotifications(
+        notifications.filter((n) => n.id !== selectedNotificationId)
+      );
+      setDialogOpen(false);
+    } catch (error) {
+      console.error("Failed to delete notification:", error);
+    }
   };
 
   const deleteWebsiteLocal = async () => {
-    await deleteWebsite(selectedWebsiteId);
-    // Remove the deleted website from the state
-    setWebsites(websites.filter((website) => website.id !== selectedWebsiteId));
-    setWebsiteDialogOpen(false);
+    try {
+      await deleteWebsite(selectedWebsiteId);
+      setWebsites(
+        websites.filter((website) => website.id !== selectedWebsiteId)
+      );
+      setWebsiteDialogOpen(false);
+    } catch (error) {
+      console.error("Failed to delete website:", error);
+    }
   };
 
-  return loadingWebsites || loadingNotifications ? (
-    <Loader />
-  ) : (
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (!currentWebsite && websites.length === 0) {
+    router.push("/notifications/add-website");
+    return null; // Render nothing while redirecting
+  }
+
+  return (
     <>
       <div className="flex flex-col sm:gap-4 py-16 sm:pl-14">
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-16 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
@@ -142,9 +168,8 @@ export default function Dashboard() {
               </Card>
             </div>
             <div className="w-fit bg-card">
-              {/* Website select */}
               <Select
-                value={currentWebsite?.id as string}
+                value={currentWebsite?.id || ""}
                 onValueChange={selectOnChange}
               >
                 <SelectTrigger className="w-[180px]">
@@ -162,7 +187,6 @@ export default function Dashboard() {
                 </SelectContent>
               </Select>
             </div>
-            {/* Notifications */}
             <Card x-chunk="dashboard-05-chunk-3">
               <CardHeader className="px-7">
                 <CardTitle>Notifications</CardTitle>
@@ -242,7 +266,7 @@ export default function Dashboard() {
                                 alt={notification.name}
                                 width={50}
                                 height={50}
-                                className="rounded-full w-[50x] h-[50px] object-cover hidden sm:block"
+                                className="rounded-full w-[50px] h-[50px] object-cover hidden sm:block"
                               />
                             ) : null}
                           </TableCell>
@@ -267,7 +291,6 @@ export default function Dashboard() {
                 </Table>
               </CardContent>
             </Card>
-            {/* Websites */}
             <Card className="dashboard-05-chunk-3">
               <CardHeader className="pb-3">
                 <CardTitle>Your Websites</CardTitle>
