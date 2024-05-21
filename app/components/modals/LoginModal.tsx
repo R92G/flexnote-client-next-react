@@ -72,7 +72,6 @@ export function LoginModal() {
         } else if (data.success) {
           form.reset();
           loginModal.onClose();
-          setSuccess(data.success);
           router.refresh();
         } else if (data.twoFactor) {
           setShowTwoFactor(true);
@@ -213,7 +212,7 @@ export function LoginModal() {
         setSuccess("");
         loginModal.onClose();
       }}
-      onSubmit={form.handleSubmit(onSubmit)} // deze gaat mis
+      onSubmit={form.handleSubmit(onSubmit)}
       body={bodyContent}
       footer={footer}
     />

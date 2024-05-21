@@ -1,13 +1,11 @@
-"use client";
-import { Button } from "./ui/button";
-import { buttonVariants } from "./ui/button";
 import { HeroCards } from "./HeroCards";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
 import USP from "./USP";
 import CTAbutton from "./CTAbutton";
+import { auth } from "@/auth";
 
-export const Hero = () => {
+export const Hero = async () => {
+  const session = await auth();
+  const currentUser = session?.user;
   return (
     <section className="container grid lg:grid-cols-2 place-items-center py-24 md:pt-40 pb-20 gap-10 overflow-hidden">
       <div className="text-center lg:text-start space-y-6">
@@ -25,7 +23,7 @@ export const Hero = () => {
         </p>
 
         <div className="space-y-4 md:space-y-0 md:space-x-4">
-          <CTAbutton />
+          <CTAbutton currentUser={currentUser} />
         </div>
       </div>
 

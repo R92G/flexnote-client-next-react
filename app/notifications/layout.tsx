@@ -8,8 +8,7 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import Link from "next/link";
-
-import { Button } from "@/app/components/ui/button";
+import { auth } from "@/auth";
 import Sidebar from "./components/sidebar";
 import { getWebsitesByUserId } from "@/app/actions/websites/getWebsitesByUserId";
 import { currentUser } from "@/lib/auth";
@@ -21,9 +20,10 @@ export default async function DashboardLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await currentUser();
+  const session = await auth();
+  const currentUser = session?.user;
   const isWebsiteAdded =
-    (await getWebsitesByUserId(user?.id as string)).length > 0;
+    (await getWebsitesByUserId(currentUser?.id as string)).length > 0;
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
