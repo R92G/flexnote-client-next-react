@@ -14,17 +14,20 @@ import { Newsletter } from "./components/Newsletter";
 import { FAQ } from "./components/FAQ";
 import { Footer } from "./components/Footer";
 import { ScrollToTop } from "./components/ScrollToTop";
+import { auth } from "@/auth";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+  const currentUser = session?.user;
   return (
     <>
       <Hero />
       <Sponsors />
       <About />
-      <HowItWorks />
+      <HowItWorks currentUser={currentUser} />
       <Features />
       {/* <Services /> */}
-      <Cta />
+      <Cta currentUser={currentUser} />
       <Testimonials />
       {/* <Team /> */}
       <Pricing />

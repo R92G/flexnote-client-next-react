@@ -1,8 +1,12 @@
 "use client";
 import CTAbutton from "./CTAbutton";
-import { Button } from "./ui/button";
+import { ExtendedUser } from "@/next-auth";
 
-export const Cta = () => {
+interface CtaProps {
+  currentUser?: ExtendedUser;
+}
+
+export const Cta = ({ currentUser }: CtaProps) => {
   return (
     <section id="cta" className="bg-muted/50 py-16 my-24 sm:my-32">
       <div className="container lg:grid lg:grid-cols-2 place-items-center relative">
@@ -20,7 +24,7 @@ export const Cta = () => {
         </div>
 
         <div className="space-y-4 lg:col-start-2 ">
-          <CTAbutton />
+          <CTAbutton currentUser={currentUser} />
         </div>
         {/* Shadow effect */}
       </div>

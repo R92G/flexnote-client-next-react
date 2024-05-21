@@ -15,7 +15,7 @@ const Loader = () => {
     >
       <PuffLoader
         size={100}
-        className="drop-shadow-xl shadow-black/10 dark:shadow-white/10"
+        className="drop-shadow-xl light:shadow-black/10 dark:shadow-white/10"
       />
     </div>
   );

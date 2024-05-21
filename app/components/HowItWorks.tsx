@@ -2,6 +2,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { MedalIcon, MapIcon, PlaneIcon, GiftIcon } from "../components/Icons";
 import CTAbutton from "./CTAbutton";
+import { ExtendedUser } from "@/next-auth";
+
+interface HowItWorksProps {
+  currentUser?: ExtendedUser;
+}
 
 interface FeatureProps {
   icon: JSX.Element;
@@ -24,7 +29,7 @@ const features: FeatureProps[] = [
   },
 ];
 
-export const HowItWorks = () => {
+export const HowItWorks = ({ currentUser }: HowItWorksProps) => {
   return (
     <section id="howItWorks" className="container text-center py-12 sm:py-24">
       <h2 className="text-3xl md:text-4xl font-bold ">How It Works</h2>
@@ -45,7 +50,7 @@ export const HowItWorks = () => {
           </Card>
         ))}
       </div>
-      <CTAbutton />
+      <CTAbutton currentUser={currentUser} />
     </section>
   );
 };
