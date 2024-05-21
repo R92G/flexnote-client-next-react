@@ -2,9 +2,36 @@
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { ArrowUpToLine } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export const ScrollToTop = () => {
+  const pathname = usePathname();
   const [showTopBtn, setShowTopBtn] = useState(false);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const { hash } = window.location;
+      if (hash) {
+        const element = document.getElementById(hash.substring(1));
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    // Initial scroll if there's a hash in the URL
+    if (window.location.hash) {
+      handleHashChange();
+    }
+
+    // Listen to hash changes
+    window.addEventListener("hashchange", handleHashChange);
+
+    // Clean up event listener
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
