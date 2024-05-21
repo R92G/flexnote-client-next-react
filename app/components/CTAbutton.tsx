@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { ExtendedUser } from "@/next-auth";
 
 interface CTAbuttonProps {
-  currentUser: ExtendedUser | undefined;
+  currentUser?: ExtendedUser;
 }
 
 const CTAbutton = ({ currentUser }: CTAbuttonProps) => {
