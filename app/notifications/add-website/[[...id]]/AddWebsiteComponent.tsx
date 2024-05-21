@@ -128,43 +128,42 @@ const AddWebsiteComponent = ({
     });
   };
 
-  const createOrUpdateWebsiteLocal = async () => {
+  const createOrUpdateWebsiteLocal = async (
+    data: z.infer<typeof WebsiteSchema>
+  ) => {
     setError("");
     setSuccess("");
     setIsPending(true);
-    console.log("createOrUpdateStart");
 
-    form.handleSubmit(async (data) => {
-      console.log("data", data);
-      try {
-        if (data.id !== "") {
-          // De ID is aanwezig, voer een update uit
-          await updateWebsite(
-            data.id as string,
-            data.name,
-            data.url,
-            currentUser?.id as string
-          );
-          setSuccess("Website updated successfully");
-        } else {
-          // Geen ID, maak een nieuwe website
-          const { id } = await createWebsite(
-            data.name,
-            data.url,
-            currentUser?.id as string
-          );
-          setWebsiteId(id);
-          setSuccess("Website created successfully");
-          onAdd();
-          setScriptTagDialogOpen(true);
-        }
-      } catch (error) {
-        console.error("Failed to create or update website:", error);
-        setError("Failed to create or update website");
-      } finally {
-        setIsPending(false);
+    try {
+      if (data.id !== "") {
+        // De ID is aanwezig, voer een update uit
+        await updateWebsite(
+          data.id as string,
+          data.name,
+          data.url,
+          currentUser?.id as string
+        );
+        setSuccess("Website updated successfully");
+      } else {
+        // Geen ID, maak een nieuwe website
+        const { id } = await createWebsite(
+          data.name,
+          data.url,
+          currentUser?.id as string
+        );
+
+        setWebsiteId(id);
+        setSuccess("Website created successfully");
+        onAdd();
+        setScriptTagDialogOpen(true);
       }
-    })();
+    } catch (error) {
+      console.error("Failed to create or update website:", error);
+      setError("Failed to create or update website");
+    } finally {
+      setIsPending(false);
+    }
   };
 
   return (
@@ -182,7 +181,7 @@ const AddWebsiteComponent = ({
           </CardHeader>
           <CardContent>
             <Form {...form}>
-              <form>
+              <div>
                 <div className="grid gap-4 pb-8">
                   <div className="grid gap-2">
                     <FormField
@@ -227,11 +226,14 @@ const AddWebsiteComponent = ({
                 </div>
                 <FormError message={error} />
                 <FormSuccess message={success} />
-              </form>
+              </div>
             </Form>
           </CardContent>
           <CardFooter className="flex gap-4">
-            <Button disabled={isPending} onClick={createOrUpdateWebsiteLocal}>
+            <Button
+              disabled={isPending}
+              onClick={form.handleSubmit(createOrUpdateWebsiteLocal)}
+            >
               {websiteId === "" ? "Create Website" : "Update Website"}
             </Button>
             {websiteId !== "" ? (
