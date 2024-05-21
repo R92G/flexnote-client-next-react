@@ -13,15 +13,11 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import { ModeToggle } from "./mode-toggle";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import { Button, buttonVariants } from "./ui/button";
-import { Menu } from "lucide-react";
-import { LogoIcon } from "./Icons";
+import { buttonVariants } from "./ui/button";
 import { CiMenuFries } from "react-icons/ci";
 import Link from "next/link";
-import useLoginModal from "../hooks/useLoginModal";
-import useRegisterModal from "../hooks/useRegisterModal";
 import { UserMenu } from "./UserMenu";
+import { ExtendedUser } from "@/next-auth";
 
 interface RouteProps {
   href: string;
@@ -48,17 +44,11 @@ const routeList: RouteProps[] = [
 ];
 
 interface NavbarProps {
-  currentUser: any;
+  currentUser: ExtendedUser | undefined;
 }
 
 export const Navbar = ({ currentUser }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const loginModal = useLoginModal();
-  const registerModal = useRegisterModal();
-
-  const openModal = () => {
-    loginModal.onOpen();
-  };
 
   const handleMenuClick = () => {
     setIsOpen(!isOpen);

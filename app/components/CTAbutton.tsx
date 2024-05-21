@@ -4,8 +4,13 @@ import { Button } from "./ui/button";
 import { CirclePlus } from "lucide-react";
 import useRegisterModal from "../hooks/useRegisterModal";
 import { useRouter } from "next/navigation";
+import { ExtendedUser } from "@/next-auth";
 
-const CTAbutton = ({ currentUser }: any) => {
+interface CTAbuttonProps {
+  currentUser: ExtendedUser | undefined;
+}
+
+const CTAbutton = ({ currentUser }: CTAbuttonProps) => {
   const registerModal = useRegisterModal();
   const router = useRouter();
 

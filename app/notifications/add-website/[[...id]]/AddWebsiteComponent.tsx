@@ -47,23 +47,24 @@ import {
 const schema = z.object({
   email: z.string().email(),
 });
+import { ExtendedUser } from "@/next-auth";
 
 interface AddWebsiteComponentProps {
   params: any;
-  currentUser: any;
+  currentUser: ExtendedUser | undefined;
 }
 
 const AddWebsiteComponent = ({
   params,
   currentUser,
 }: AddWebsiteComponentProps) => {
+  console.log("currentUser", currentUser);
   const { id } = params;
 
   const router = useRouter();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, setIsPending] = useState(false);
-  const [newWebsiteId, setNewWebsiteId] = useState<string | undefined>("");
   const [scriptTagDialogOpen, setScriptTagDialogOpen] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const { onAdd } = useGlobalWebsiteCount();
