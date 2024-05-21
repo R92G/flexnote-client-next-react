@@ -58,7 +58,6 @@ const AddWebsiteComponent = ({
   params,
   currentUser,
 }: AddWebsiteComponentProps) => {
-  console.log("currentUser", currentUser);
   const { id } = params;
 
   const router = useRouter();
@@ -130,16 +129,13 @@ const AddWebsiteComponent = ({
   };
 
   const createOrUpdateWebsiteLocal = async () => {
-    console.log("CREATE OR UPDATE WEBSITE");
-    //log to show if form handleSubmit exists
-    console.log("currentuser: ", currentUser);
-    console.log("handleSubmitFn: ", form.handleSubmit);
     setError("");
     setSuccess("");
     setIsPending(true);
+    console.log("createOrUpdateStart");
 
     form.handleSubmit(async (data) => {
-      console.log("DATA", data);
+      console.log("data", data);
       try {
         if (data.id !== "") {
           // De ID is aanwezig, voer een update uit
