@@ -30,7 +30,7 @@ export default async function Home() {
       <Cta currentUser={currentUser} />
       <Testimonials />
       {/* <Team /> */}
-      <Pricing />
+      <Pricing currentUser={currentUser} />
       <Newsletter />
       <FAQ />
       <Footer />

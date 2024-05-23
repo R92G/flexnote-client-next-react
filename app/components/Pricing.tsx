@@ -11,10 +11,16 @@ import {
 } from "./ui/card";
 import { Check } from "lucide-react";
 import useRegisterModal from "../hooks/useRegisterModal";
+import { ExtendedUser } from "@/next-auth";
+import { useRouter } from "next/navigation";
 
 enum PopularPlanType {
   NO = 0,
   YES = 1,
+}
+
+interface PricingPageProps {
+  currentUser?: ExtendedUser;
 }
 
 interface PricingProps {
@@ -66,8 +72,19 @@ const pricingList: PricingProps[] = [
   },
 ];
 
-export const Pricing = () => {
+export const Pricing = ({ currentUser }: PricingPageProps) => {
   const registerModal = useRegisterModal();
+  const router = useRouter();
+
+  const handleOnClick = () => {
+    if (!currentUser) {
+      registerModal.onOpen();
+    } else {
+      // Handle payment logic
+      router.push("notifications/dashboard");
+    }
+  };
+
   return (
     <section id="pricing" className="container py-12 sm:py-24">
       <h2 className="text-3xl md:text-4xl font-bold text-center">
@@ -109,7 +126,7 @@ export const Pricing = () => {
             </CardHeader>
 
             <CardContent>
-              <Button onClick={registerModal.onOpen} className="w-full">
+              <Button onClick={handleOnClick} className="w-full">
                 {pricing.buttonText}
               </Button>
             </CardContent>
