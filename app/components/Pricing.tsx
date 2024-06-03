@@ -35,41 +35,46 @@ interface PricingProps {
 const pricingList: PricingProps[] = [
   {
     title: "Free",
-    popular: 0,
+    popular: PopularPlanType.YES,
     price: 0,
     description:
       "An ideal choice for individuals just starting out. Get essential features without any cost.",
     buttonText: "Get Started",
-    benefitList: ["1 Team member", "1 Website", "1 Notification", "Support"],
-  },
-  {
-    title: "Premium",
-    popular: 1,
-    price: 5,
-    description:
-      "Perfect for growing teams looking to boost their outreach with more features and flexibility.",
-    buttonText: "Start Free Trial",
     benefitList: [
-      "3 Team members",
-      "3 Websites",
-      "Up to 18 Notifications",
-      "Priority support",
+      "1 Team member",
+      "Unlimited Website",
+      "Unlimited Notification",
+      "Support",
     ],
   },
-  {
-    title: "Enterprise",
-    popular: 0,
-    price: 40,
-    description:
-      "A comprehensive suite for large organizations needing advanced capabilities and dedicated support.",
-    buttonText: "Contact Us",
-    benefitList: [
-      "Unlimited team members",
-      "Unlimited websites",
-      "Unlimited notifications",
-      "Personalized support",
-    ],
-  },
+  // {
+  //   title: "Premium",
+  //   popular: 1,
+  //   price: 5,
+  //   description:
+  //     "Perfect for growing teams looking to boost their outreach with more features and flexibility.",
+  //   buttonText: "Start Free Trial",
+  //   benefitList: [
+  //     "3 Team members",
+  //     "3 Websites",
+  //     "Up to 18 Notifications",
+  //     "Priority support",
+  //   ],
+  // },
+  // {
+  //   title: "Enterprise",
+  //   popular: 0,
+  //   price: 40,
+  //   description:
+  //     "A comprehensive suite for large organizations needing advanced capabilities and dedicated support.",
+  //   buttonText: "Contact Us",
+  //   benefitList: [
+  //     "Unlimited team members",
+  //     "Unlimited websites",
+  //     "Unlimited notifications",
+  //     "Personalized support",
+  //   ],
+  // },
 ];
 
 export const Pricing = ({ currentUser }: PricingPageProps) => {
